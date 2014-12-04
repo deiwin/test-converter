@@ -26,12 +26,44 @@ func main() {
 
 		if strings.HasPrefix(trimmedLine, "tests") {
 			fields, values, testFuncName := getTestData(scanner)
-			fmt.Println("var tests = []struct{")
-			fmt.Println("var tests = []struct{")
+			printStructuredTestData(fields, values, testFuncName)
 		} else {
 			fmt.Println(line)
 		}
 	}
+}
+
+func printStructuredTestData(fields []field, values []string, testFuncName string) {
+	fmt.Println("\tvar tests = []struct{")
+	for _, f := range fields {
+		fmt.Printf("\t\t%s\t%s\n", f.Name, f.Type)
+	}
+	fmt.Printf("\t\t%s\t%s\n", "expected", "bool")
+	fmt.Println("\t}{")
+	for i, value := range values {
+		fieldValues := getNthFieldValues(fields, i)
+		fieldPlusExpectedValues := append(fieldValues, value)
+		fmt.Printf("\t\t{%s},\n", strings.Join(fieldPlusExpectedValues, ", "))
+	}
+	fmt.Println("\tfor _, test := range tests {")
+	fmt.Printf("\t\tactual := %s(%s)\n", testFuncName, getCommaSeparatedFieldTypes(fields))
+	fmt.Println("\t\tif actual != test.expected {")
+}
+
+func getCommaSeparatedFieldTypes(fields []field) string {
+	fieldTypes := make([]string, len(fields))
+	for i, f := range fields {
+		fieldTypes[i] = f.Type
+	}
+	return strings.Join(fieldTypes, ", ")
+}
+
+func getNthFieldValues(fields []field, n int) (fieldValues []string) {
+	fieldValues = make([]string, len(fields))
+	for i, f := range fields {
+		fieldValues[i] = f.Values[n]
+	}
+	return
 }
 
 func getTestData(scanner *bufio.Scanner) (fields []field, values []string, testFuncName string) {
