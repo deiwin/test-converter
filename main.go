@@ -41,7 +41,11 @@ func printStructuredTestData(fields []field, values []string, testFuncName strin
 	}
 	fmt.Printf("\t\t%s\t%s\n", "expected", "bool")
 	fmt.Println("\t}{")
+	minNumberOfValues := getMinNumberOfValues(fields, values)
 	for i, value := range values {
+		if i >= minNumberOfValues {
+			break
+		}
 		fieldValues := getNthFieldValues(fields, i)
 		fieldPlusExpectedValues := append(fieldValues, value)
 		fmt.Printf("\t\t{%s},\n", strings.Join(fieldPlusExpectedValues, ", "))
@@ -51,6 +55,17 @@ func printStructuredTestData(fields []field, values []string, testFuncName strin
 	fmt.Printf("\t\tactual := %s(%s)\n", testFuncName, getCommaSeparatedFieldNames(fields))
 	fmt.Println("\t\tif actual != test.expected {")
 	fmt.Println("\t\t\t" + `t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)`)
+}
+
+func getMinNumberOfValues(fields []field, values []string) (min int) {
+	min = len(values)
+	for _, f := range fields {
+		nrOfValues := len(f.Values)
+		if nrOfValues < min {
+			min = nrOfValues
+		}
+	}
+	return
 }
 
 func getCommaSeparatedFieldNames(fields []field) string {
