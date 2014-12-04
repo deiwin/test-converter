@@ -15,7 +15,8 @@ type field struct {
 }
 
 var (
-	typeMatcher = regexp.MustCompile(`\[\][^{]+`)
+	typeMatcher     = regexp.MustCompile(`\[\][^{]+`)
+	commaWhitespace = regexp.MustCompile(`, `)
 )
 
 func main() {
@@ -36,7 +37,7 @@ func main() {
 func printStructuredTestData(fields []field, values []string, testFuncName string) {
 	fmt.Println("\tvar tests = []struct{")
 	for _, f := range fields {
-		fmt.Printf("\t\t%s\t%s\n", f.Name, f.Type)
+		fmt.Printf("\t\t%s\t\t%s\n", f.Name, f.Type)
 	}
 	fmt.Printf("\t\t%s\t%s\n", "expected", "bool")
 	fmt.Println("\t}{")
@@ -45,17 +46,18 @@ func printStructuredTestData(fields []field, values []string, testFuncName strin
 		fieldPlusExpectedValues := append(fieldValues, value)
 		fmt.Printf("\t\t{%s},\n", strings.Join(fieldPlusExpectedValues, ", "))
 	}
+	fmt.Println("\t}")
 	fmt.Println("\tfor _, test := range tests {")
-	fmt.Printf("\t\tactual := %s(%s)\n", testFuncName, getCommaSeparatedFieldTypes(fields))
+	fmt.Printf("\t\tactual := %s(%s)\n", testFuncName, getCommaSeparatedFieldNames(fields))
 	fmt.Println("\t\tif actual != test.expected {")
 }
 
-func getCommaSeparatedFieldTypes(fields []field) string {
-	fieldTypes := make([]string, len(fields))
+func getCommaSeparatedFieldNames(fields []field) string {
+	fieldNames := make([]string, len(fields))
 	for i, f := range fields {
-		fieldTypes[i] = f.Type
+		fieldNames[i] = "test." + f.Name
 	}
-	return strings.Join(fieldTypes, ", ")
+	return strings.Join(fieldNames, ", ")
 }
 
 func getNthFieldValues(fields []field, n int) (fieldValues []string) {
@@ -94,7 +96,7 @@ func parseFields(scanner *bufio.Scanner) (fields []field) {
 
 func parseField(scanner *bufio.Scanner) field {
 	line := scanner.Text()
-	fieldType := typeMatcher.FindString(line)
+	fieldType := typeMatcher.FindString(line)[2:] // [2:] to remove brackets
 	fieldName := strings.Replace(strings.Fields(line)[0], "tests", "param", 1)
 	values := findAllValues(scanner)
 
@@ -105,27 +107,40 @@ func parseField(scanner *bufio.Scanner) field {
 	}
 }
 
-func findAllValues(scanner *bufio.Scanner) (allValues []string) {
-	line := scanner.Text()
-	allValues = []string(nil)
-	afterOpeningBracket := line[strings.Index(line, "{"):]
-	for line = afterOpeningBracket; !strings.Contains(line, "}"); line = scanner.Text() {
-		values := splitCommaAndSpaceSeparatedString(line)
-		allValues = append(allValues, values...)
+func findAllValues(scanner *bufio.Scanner) []string {
+	stringBetweenBraces := getStringBetweenBraces(scanner)
+	return parseValues(stringBetweenBraces)
+}
 
+func getStringBetweenBraces(scanner *bufio.Scanner) (allValuesString string) {
+	line := scanner.Text()
+	allValuesString = ""
+	afterOpeningBracket := line[strings.Index(line, "{")+1:]
+	for line = afterOpeningBracket; !strings.HasSuffix(line, "}"); line = scanner.Text() {
+		allValuesString = allValuesString + line + "\n"
 		scanner.Scan()
 	}
 	beforeClosingBracket := line[:len(line)-1]
-	values := splitCommaAndSpaceSeparatedString(beforeClosingBracket)
-	allValues = append(allValues, values...)
+	allValuesString = allValuesString + beforeClosingBracket
 	return
 }
 
-func splitCommaAndSpaceSeparatedString(s string) (values []string) {
-	valuesWithCommas := strings.Fields(s)
-	values = make([]string, len(valuesWithCommas))
-	for i, valueWithComma := range valuesWithCommas {
-		values[i] = valueWithComma[:len(valueWithComma)-1]
+func parseValues(s string) (allValues []string) {
+	allValues = []string(nil)
+	numberOfQuotes := 0
+	lastSplit := -1
+	for i, rune := range s {
+		if rune == '`' || rune == '"' {
+			numberOfQuotes = numberOfQuotes + 1
+		} else if numberOfQuotes%2 == 0 && rune == ',' {
+			value := strings.TrimSpace(s[lastSplit+1 : i])
+			lastSplit = i
+			allValues = append(allValues, value)
+		}
+	}
+	if lastSplit+1 < len(s) {
+		value := strings.TrimSpace(s[lastSplit+1:])
+		allValues = append(allValues, value)
 	}
 	return
 }
