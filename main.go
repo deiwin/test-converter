@@ -47,9 +47,10 @@ func printStructuredTestData(fields []field, values []string, testFuncName strin
 		fmt.Printf("\t\t{%s},\n", strings.Join(fieldPlusExpectedValues, ", "))
 	}
 	fmt.Println("\t}")
-	fmt.Println("\tfor _, test := range tests {")
+	fmt.Println("\tfor i, test := range tests {")
 	fmt.Printf("\t\tactual := %s(%s)\n", testFuncName, getCommaSeparatedFieldNames(fields))
 	fmt.Println("\t\tif actual != test.expected {")
+	fmt.Println("\t\t\t" + `t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)`)
 }
 
 func getCommaSeparatedFieldNames(fields []field) string {
@@ -76,6 +77,8 @@ func getTestData(scanner *bufio.Scanner) (fields []field, values []string, testF
 	scanner.Scan()
 	testFuncName = getTestFuncName(scanner.Text())
 	// also skip the if line
+	scanner.Scan()
+	// also skip the log line, it will be rewritten
 	scanner.Scan()
 	return
 }
