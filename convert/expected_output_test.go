@@ -19,8 +19,7 @@ func TestIsAlpha(t *testing.T) {
 	for i, test := range tests {
 		actual := IsAlpha(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsAlpha(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -41,8 +40,7 @@ func TestIsUnicodeLetter(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUnicodeLetter(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUnicodeLetter(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -60,8 +58,7 @@ func TestIsAlphanumeric(t *testing.T) {
 	for i, test := range tests {
 		actual := IsAlphanumeric(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsAlphanumeric(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -80,8 +77,7 @@ func TestIsUnicodeLetterNumeric(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUnicodeLetterNumeric(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUnicodeLetterNumeric(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -103,8 +99,7 @@ func TestIsNumeric(t *testing.T) {
 	for i, test := range tests {
 		actual := IsNumeric(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsNumeric(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -126,8 +121,7 @@ func TestIsUnicodeNumeric(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUnicodeNumeric(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUnicodeNumeric(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -150,8 +144,7 @@ func TestIsUnicodeDigit(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUnicodeDigit(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUnicodeDigit(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -170,8 +163,7 @@ func TestIsLowerCase(t *testing.T) {
 	for i, test := range tests {
 		actual := IsLowerCase(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsLowerCase(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -190,8 +182,7 @@ func TestIsUpperCase(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUpperCase(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUpperCase(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -212,8 +203,7 @@ func TestIsInt(t *testing.T) {
 	for i, test := range tests {
 		actual := IsInt(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsInt(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -237,8 +227,7 @@ func TestIsEmail(t *testing.T) {
 	for i, test := range tests {
 		actual := IsEmail(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsEmail(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -277,8 +266,7 @@ func TestIsURL(t *testing.T) {
 	for i, test := range tests {
 		actual := IsURL(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsURL(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -305,8 +293,7 @@ func TestIsFloat(t *testing.T) {
 	for i, test := range tests {
 		actual := IsFloat(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsFloat(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -325,8 +312,7 @@ func TestIsHexadecimal(t *testing.T) {
 	for i, test := range tests {
 		actual := IsHexadecimal(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsHexadecimal(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -346,8 +332,7 @@ func TestIsHexcolor(t *testing.T) {
 	for i, test := range tests {
 		actual := IsHexcolor(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsHexcolor(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -367,8 +352,7 @@ func TestIsRGBcolor(t *testing.T) {
 	for i, test := range tests {
 		actual := IsRGBcolor(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsRGBcolor(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -384,8 +368,7 @@ func TestIsNull(t *testing.T) {
 	for i, test := range tests {
 		actual := IsNull(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsNull(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -405,8 +388,7 @@ func TestIsDivisibleBy(t *testing.T) {
 	for i, test := range tests {
 		actual := IsDivisibleBy(test.param1, test.param2)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsDivisibleBy(%q, %q) to be %v, got %v", test.param1, test.param2, test.expected, actual)
 		}
 	}
 }
@@ -432,8 +414,7 @@ func TestIsByteLength(t *testing.T) {
 	for i, test := range tests {
 		actual := IsByteLength(test.param1, test.param2, test.param3)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsByteLength(%q, %q, %q) to be %v, got %v", test.param1, test.param2, test.param3, test.expected, actual)
 		}
 	}
 }
@@ -456,8 +437,7 @@ func TestIsJSON(t *testing.T) {
 	for i, test := range tests {
 		actual := IsJSON(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsJSON(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -480,8 +460,7 @@ func TestIsMultibyte(t *testing.T) {
 	for i, test := range tests {
 		actual := IsMultibyte(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsMultibyte(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -503,8 +482,7 @@ func TestIsASCII(t *testing.T) {
 	for i, test := range tests {
 		actual := IsASCII(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsASCII(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -525,8 +503,7 @@ func TestIsFullWidth(t *testing.T) {
 	for i, test := range tests {
 		actual := IsFullWidth(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsFullWidth(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -546,8 +523,7 @@ func TestIsHalfWidth(t *testing.T) {
 	for i, test := range tests {
 		actual := IsHalfWidth(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsHalfWidth(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -571,8 +547,7 @@ func TestIsVariableWidth(t *testing.T) {
 	for i, test := range tests {
 		actual := IsVariableWidth(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsVariableWidth(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -595,8 +570,7 @@ func TestIsUUID(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUUID(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUUID(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 	// UUID ver. 3
@@ -613,8 +587,7 @@ func TestIsUUID(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUUIDv3(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUUIDv3(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 	// UUID ver. 4
@@ -632,8 +605,7 @@ func TestIsUUID(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUUIDv4(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUUIDv4(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 	// UUID ver. 5
@@ -651,8 +623,7 @@ func TestIsUUID(t *testing.T) {
 	for i, test := range tests {
 		actual := IsUUIDv5(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsUUIDv5(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 
@@ -675,8 +646,7 @@ func TestIsCreditCard(t *testing.T) {
 	for i, test := range tests {
 		actual := IsCreditCard(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsCreditCard(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -701,8 +671,7 @@ func TestIsISBN(t *testing.T) {
 	for i, test := range tests {
 		actual := IsISBN10(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsISBN10(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 	// ISBN 13
@@ -722,8 +691,7 @@ func TestIsISBN(t *testing.T) {
 	for i, test := range tests {
 		actual := IsISBN13(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsISBN13(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 	// Without version
@@ -745,8 +713,7 @@ func TestIsISBN(t *testing.T) {
 	for i, test := range tests {
 		actual := IsISBN(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsISBN(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -772,8 +739,7 @@ func TestIsDataURI(t *testing.T) {
 	for i, test := range tests {
 		actual := IsDataURI(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsDataURI(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -799,8 +765,7 @@ func TestIsBase64(t *testing.T) {
 	for i, test := range tests {
 		actual := IsBase64(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsBase64(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -821,8 +786,7 @@ func TestIsIP(t *testing.T) {
 	for i, test := range tests {
 		actual := IsIPv4(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsIPv4(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 	// IPv6
@@ -840,8 +804,7 @@ func TestIsIP(t *testing.T) {
 	for i, test := range tests {
 		actual := IsIPv6(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsIPv6(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 	// Without version
@@ -860,8 +823,7 @@ func TestIsIP(t *testing.T) {
 	for i, test := range tests {
 		actual := IsIP(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsIP(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -880,8 +842,7 @@ func TestIsMAC(t *testing.T) {
 	for i, test := range tests {
 		actual := IsMAC(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsMAC(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -900,8 +861,7 @@ func TestIsLatitude(t *testing.T) {
 	for i, test := range tests {
 		actual := IsLatitude(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsLatitude(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }
@@ -920,8 +880,7 @@ func TestIsLongitude(t *testing.T) {
 	for i, test := range tests {
 		actual := IsLongitude(test.param)
 		if actual != test.expected {
-			t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)
-			t.FailNow()
+			t.Errorf("Expected IsLongitude(%q) to be %v, got %v", test.param, test.expected, actual)
 		}
 	}
 }

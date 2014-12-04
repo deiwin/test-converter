@@ -53,9 +53,19 @@ func printStructuredTestData(output io.Writer, fields []field, values []string, 
 	}
 	fmt.Fprintln(output, "\t}")
 	fmt.Fprintln(output, "\tfor i, test := range tests {")
+	commaSeparatedFieldNames := getCommaSeparatedFieldNames(fields)
 	fmt.Fprintf(output, "\t\tactual := %s(%s)\n", testFuncName, getCommaSeparatedFieldNames(fields))
 	fmt.Fprintln(output, "\t\tif actual != test.expected {")
-	fmt.Fprintln(output, "\t\t\t"+`t.Log("Case ", i, ": expected ", test.expected, ", but result was ", actual)`)
+	functionCallFormatter := getFunctionCallFormatter(testFuncName, fields)
+	fmt.Fprintln(output, "\t\t\t"+`t.Errorf("Expected `+functionCallFormatter+` to be %v, got %v", `+commaSeparatedFieldNames+`, test.expected, actual)`)
+}
+
+func getFunctionCallFormatter(funcName string, fields []field) string {
+	params := make([]string, len(fields))
+	for i := range fields {
+		params[i] = `%q`
+	}
+	return fmt.Sprintf("%s(%s)", funcName, strings.Join(params, ", "))
 }
 
 func getMinNumberOfValues(fields []field, values []string) (min int) {
@@ -94,7 +104,8 @@ func getTestData(scanner *bufio.Scanner) (fields []field, values []string, testF
 	testFuncName = getTestFuncName(scanner.Text())
 	// also skip the if line
 	scanner.Scan()
-	// also skip the log line, it will be rewritten
+	// also skip the log and fail lines, they will be rewritten
+	scanner.Scan()
 	scanner.Scan()
 	return
 }
