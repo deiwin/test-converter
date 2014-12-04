@@ -494,11 +494,11 @@ func TestIsFullWidth(t *testing.T) {
 	}{
 		{"abc", false},
 		{"abc123", false},
-		{"!\"#$%&()<>/+=-_? ~^|., false},
-		{@` + "`" + `{}[]", true},
+		{"!\"#$%&()<>/+=-_? ~^|.,@` + "`" + `{}[]", false},
 		{"ひらがな・カタカナ、．漢字", true},
 		{"３ー０　ａ＠ｃｏｍ", true},
 		{"Ｆｶﾀｶﾅﾞﾬ", true},
+		{"Good＝Parts", true},
 	}
 	for i, test := range tests {
 		actual := IsFullWidth(test.param)
@@ -515,10 +515,10 @@ func TestIsHalfWidth(t *testing.T) {
 	}{
 		{"あいうえお", false},
 		{"００１１", false},
-		{"!\"#$%&()<>/+=-_? ~^|., true},
-		{@` + "`" + `{}[]", true},
+		{"!\"#$%&()<>/+=-_? ~^|.,@` + "`" + `{}[]", true},
 		{"l-btn_02--active", true},
 		{"abc123い", true},
+		{"ｶﾀｶﾅﾞﾬ￩", true},
 	}
 	for i, test := range tests {
 		actual := IsHalfWidth(test.param)
@@ -539,10 +539,10 @@ func TestIsVariableWidth(t *testing.T) {
 		{"Good＝Parts", true},
 		{"abc", false},
 		{"abc123", false},
-		{"!\"#$%&()<>/+=-_? ~^|., false},
-		{@` + "`" + `{}[]", false},
+		{"!\"#$%&()<>/+=-_? ~^|.,@` + "`" + `{}[]", false},
 		{"ひらがな・カタカナ、．漢字", false},
 		{"１２３４５６", false},
+		{"ｶﾀｶﾅﾞﾬ", false},
 	}
 	for i, test := range tests {
 		actual := IsVariableWidth(test.param)

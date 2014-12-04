@@ -159,8 +159,13 @@ func parseValues(s string) (allValues []string) {
 	allValues = []string(nil)
 	numberOfQuotes := 0
 	lastSplit := -1
+	previousEscaped := false
 	for i, rune := range s {
-		if rune == '`' || rune == '"' {
+		if previousEscaped {
+			previousEscaped = false
+		} else if rune == '\\' {
+			previousEscaped = true
+		} else if rune == '"' {
 			numberOfQuotes = numberOfQuotes + 1
 		} else if numberOfQuotes%2 == 0 && rune == ',' {
 			value := strings.TrimSpace(s[lastSplit+1 : i])
