@@ -30,7 +30,7 @@ func Test(input io.Reader, output io.Writer) {
 			fields, values, testFuncName := getTestData(scanner)
 			printStructuredTestData(output, fields, values, testFuncName)
 		} else {
-			fmt.Println(line)
+			fmt.Fprintln(output, line)
 		}
 	}
 }
