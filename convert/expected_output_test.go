@@ -5,6 +5,8 @@ const output = `package govalidator
 import "testing"
 
 func TestIsAlpha(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -16,7 +18,7 @@ func TestIsAlpha(t *testing.T) {
 		{"ABC", true},
 		{"FoObAr", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsAlpha(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsAlpha(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -25,6 +27,8 @@ func TestIsAlpha(t *testing.T) {
 }
 
 func TestIsUnicodeLetter(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -37,7 +41,7 @@ func TestIsUnicodeLetter(t *testing.T) {
 		{"소주", true},
 		{"FoObAr", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsUnicodeLetter(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsUnicodeLetter(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -46,6 +50,8 @@ func TestIsUnicodeLetter(t *testing.T) {
 }
 
 func TestIsAlphanumeric(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -55,7 +61,7 @@ func TestIsAlphanumeric(t *testing.T) {
 		{"abc123", true},
 		{"ABC111", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsAlphanumeric(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsAlphanumeric(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -64,6 +70,8 @@ func TestIsAlphanumeric(t *testing.T) {
 }
 
 func TestIsUnicodeLetterNumeric(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -74,7 +82,7 @@ func TestIsUnicodeLetterNumeric(t *testing.T) {
 		{"소주", true},
 		{"〩Hours", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsUnicodeLetterNumeric(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsUnicodeLetterNumeric(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -83,6 +91,8 @@ func TestIsUnicodeLetterNumeric(t *testing.T) {
 }
 
 func TestIsNumeric(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -96,7 +106,7 @@ func TestIsNumeric(t *testing.T) {
 		{" ", false},
 		{".", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsNumeric(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsNumeric(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -105,6 +115,8 @@ func TestIsNumeric(t *testing.T) {
 }
 
 func TestIsUnicodeNumeric(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -118,7 +130,7 @@ func TestIsUnicodeNumeric(t *testing.T) {
 		{" ", false},
 		{".", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsUnicodeNumeric(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsUnicodeNumeric(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -127,6 +139,8 @@ func TestIsUnicodeNumeric(t *testing.T) {
 }
 
 func TestIsUnicodeDigit(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -141,7 +155,7 @@ func TestIsUnicodeDigit(t *testing.T) {
 		{" ", false},
 		{".", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsUnicodeDigit(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsUnicodeDigit(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -150,6 +164,8 @@ func TestIsUnicodeDigit(t *testing.T) {
 }
 
 func TestIsLowerCase(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -160,7 +176,7 @@ func TestIsLowerCase(t *testing.T) {
 		{"fooBar", false},
 		{"123ABC", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsLowerCase(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsLowerCase(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -169,6 +185,8 @@ func TestIsLowerCase(t *testing.T) {
 }
 
 func TestIsUpperCase(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -179,7 +197,7 @@ func TestIsUpperCase(t *testing.T) {
 		{"fooBar", false},
 		{"abacaba123", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsUpperCase(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsUpperCase(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -188,6 +206,8 @@ func TestIsUpperCase(t *testing.T) {
 }
 
 func TestIsInt(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -200,7 +220,7 @@ func TestIsInt(t *testing.T) {
 		{" ", false},
 		{"000", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsInt(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsInt(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -209,6 +229,8 @@ func TestIsInt(t *testing.T) {
 }
 
 func TestIsEmail(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -224,7 +246,7 @@ func TestIsEmail(t *testing.T) {
 		{"hans@m端ller.com", true},
 		{"hans.m端ller@test.com", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsEmail(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsEmail(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -233,6 +255,8 @@ func TestIsEmail(t *testing.T) {
 }
 
 func TestIsURL(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -263,7 +287,7 @@ func TestIsURL(t *testing.T) {
 		{"http://www.-foobar.com/", false},
 		{"http://www.foo---bar.com/", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsURL(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsURL(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -272,6 +296,8 @@ func TestIsURL(t *testing.T) {
 }
 
 func TestIsFloat(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -290,7 +316,7 @@ func TestIsFloat(t *testing.T) {
 		{"01.123", true},
 		{"-0.22250738585072011e-307", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsFloat(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsFloat(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -299,6 +325,8 @@ func TestIsFloat(t *testing.T) {
 }
 
 func TestIsHexadecimal(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -309,7 +337,7 @@ func TestIsHexadecimal(t *testing.T) {
 		{"deadBEEF", true},
 		{"ff0044", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsHexadecimal(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsHexadecimal(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -318,6 +346,8 @@ func TestIsHexadecimal(t *testing.T) {
 }
 
 func TestIsHexcolor(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -329,7 +359,7 @@ func TestIsHexcolor(t *testing.T) {
 		{"fff", true},
 		{"#f00", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsHexcolor(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsHexcolor(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -338,6 +368,8 @@ func TestIsHexcolor(t *testing.T) {
 }
 
 func TestIsRGBcolor(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -349,7 +381,7 @@ func TestIsRGBcolor(t *testing.T) {
 		{"rgba(0,31,255)", false},
 		{"rgb(0,  31, 255)", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsRGBcolor(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsRGBcolor(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -358,6 +390,8 @@ func TestIsRGBcolor(t *testing.T) {
 }
 
 func TestIsNull(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -365,7 +399,7 @@ func TestIsNull(t *testing.T) {
 		{"abacaba", false},
 		{"", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsNull(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsNull(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -374,6 +408,8 @@ func TestIsNull(t *testing.T) {
 }
 
 func TestIsDivisibleBy(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param1		string
 		param2		string
@@ -385,7 +421,7 @@ func TestIsDivisibleBy(t *testing.T) {
 		{"123", "foo", false},
 		{"123", "0", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsDivisibleBy(test.param1, test.param2)
 		if actual != test.expected {
 			t.Errorf("Expected IsDivisibleBy(%q, %q) to be %v, got %v", test.param1, test.param2, test.expected, actual)
@@ -399,6 +435,8 @@ func ExampleIsDivisibleBy() {
 }
 
 func TestIsByteLength(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param1		string
 		param2		int
@@ -411,7 +449,7 @@ func TestIsByteLength(t *testing.T) {
 		{"abacaba", 0, 8, true},
 		{"\ufff0", 1, 1, false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsByteLength(test.param1, test.param2, test.param3)
 		if actual != test.expected {
 			t.Errorf("Expected IsByteLength(%q, %q, %q) to be %v, got %v", test.param1, test.param2, test.param3, test.expected, actual)
@@ -420,6 +458,8 @@ func TestIsByteLength(t *testing.T) {
 }
 
 func TestIsJSON(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -434,7 +474,7 @@ func TestIsJSON(t *testing.T) {
 		{"[]", true},
 		{"null", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsJSON(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsJSON(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -443,6 +483,8 @@ func TestIsJSON(t *testing.T) {
 }
 
 func TestIsMultibyte(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -457,7 +499,7 @@ func TestIsMultibyte(t *testing.T) {
 		{"1234abcDEｘｙｚ", true},
 		{"ｶﾀｶﾅ", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsMultibyte(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsMultibyte(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -466,6 +508,8 @@ func TestIsMultibyte(t *testing.T) {
 }
 
 func TestIsASCII(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -479,7 +523,7 @@ func TestIsASCII(t *testing.T) {
 		{"test@example.com", true},
 		{"1234abcDEF", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsASCII(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsASCII(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -488,6 +532,8 @@ func TestIsASCII(t *testing.T) {
 }
 
 func TestIsFullWidth(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -500,7 +546,7 @@ func TestIsFullWidth(t *testing.T) {
 		{"Ｆｶﾀｶﾅﾞﾬ", true},
 		{"Good＝Parts", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsFullWidth(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsFullWidth(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -509,6 +555,8 @@ func TestIsFullWidth(t *testing.T) {
 }
 
 func TestIsHalfWidth(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -520,7 +568,7 @@ func TestIsHalfWidth(t *testing.T) {
 		{"abc123い", true},
 		{"ｶﾀｶﾅﾞﾬ￩", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsHalfWidth(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsHalfWidth(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -529,6 +577,8 @@ func TestIsHalfWidth(t *testing.T) {
 }
 
 func TestIsVariableWidth(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -544,7 +594,7 @@ func TestIsVariableWidth(t *testing.T) {
 		{"１２３４５６", false},
 		{"ｶﾀｶﾅﾞﾬ", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsVariableWidth(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsVariableWidth(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -554,82 +604,56 @@ func TestIsVariableWidth(t *testing.T) {
 
 func TestIsUUID(t *testing.T) {
 	// Tests without version
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"", false},
-		{"xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3", false},
-		{"A987FBC9-4BED-3078-CF07-9141BA07C9F3xxx", false},
-		{"A987FBC94BED3078CF079141BA07C9F3", false},
-		{"934859", false},
-		{"987FBC9-4BED-3078-CF07A-9141BA07C9F3", false},
-		{"AAAAAAAA-1111-1111-AAAG-111111111111", false},
-		{"A987FBC9-4BED-3078-CF07-9141BA07C9F3", true},
-	}
-	for i, test := range tests {
-		actual := IsUUID(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsUUID(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests := []string{"", "xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3", "A987FBC9-4BED-3078-CF07-9141BA07C9F3xxx",
+		"A987FBC94BED3078CF079141BA07C9F3", "934859", "987FBC9-4BED-3078-CF07A-9141BA07C9F3",
+		"AAAAAAAA-1111-1111-AAAG-111111111111", "A987FBC9-4BED-3078-CF07-9141BA07C9F3"}
+	expected := []bool{false, false, false, false, false, false, false, true}
+	for i := 0; i < len(tests); i++ {
+		result := IsUUID(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 	// UUID ver. 3
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"", false},
-		{"412452646", false},
-		{"xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3", false},
-		{"A987FBC9-4BED-4078-8F07-9141BA07C9F3", false},
-		{"A987FBC9-4BED-3078-CF07-9141BA07C9F3", true},
-	}
-	for i, test := range tests {
-		actual := IsUUIDv3(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsUUIDv3(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests = []string{"", "412452646", "xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3", "A987FBC9-4BED-4078-8F07-9141BA07C9F3",
+		"A987FBC9-4BED-3078-CF07-9141BA07C9F3"}
+	expected = []bool{false, false, false, false, true}
+	for i := 0; i < len(tests); i++ {
+		result := IsUUIDv3(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 	// UUID ver. 4
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"", false},
-		{"xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3", false},
-		{"A987FBC9-4BED-5078-AF07-9141BA07C9F3", false},
-		{"934859", false},
-		{"57B73598-8764-4AD0-A76A-679BB6640EB1", true},
-		{"625E63F3-58F5-40B7-83A1-A72AD31ACFFB", true},
-	}
-	for i, test := range tests {
-		actual := IsUUIDv4(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsUUIDv4(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests = []string{"", "xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3", "A987FBC9-4BED-5078-AF07-9141BA07C9F3",
+		"934859", "57B73598-8764-4AD0-A76A-679BB6640EB1", "625E63F3-58F5-40B7-83A1-A72AD31ACFFB"}
+	expected = []bool{false, false, false, false, true, true}
+	for i := 0; i < len(tests); i++ {
+		result := IsUUIDv4(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 	// UUID ver. 5
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3", false},
-		{"9c858901-8a57-4791-81fe-4c455b099bc9", false},
-		{"A987FBC9-4BED-3078-CF07-9141BA07C9F3", false},
-		{"", false},
-		{"987FBC97-4BED-5078-AF07-9141BA07C9F3", true},
-		{"987FBC97-4BED-5078-9F07-9141BA07C9F3", true},
-	}
-	for i, test := range tests {
-		actual := IsUUIDv5(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsUUIDv5(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests = []string{"xxxA987FBC9-4BED-3078-CF07-9141BA07C9F3", "9c858901-8a57-4791-81fe-4c455b099bc9", "A987FBC9-4BED-3078-CF07-9141BA07C9F3",
+		"", "987FBC97-4BED-5078-AF07-9141BA07C9F3", "987FBC97-4BED-5078-9F07-9141BA07C9F3"}
+	expected = []bool{false, false, false, false, true, true}
+	for i := 0; i < len(tests); i++ {
+		result := IsUUIDv5(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 
 }
 
 func TestIsCreditCard(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -643,7 +667,7 @@ func TestIsCreditCard(t *testing.T) {
 		{"4929 7226 5379 7141", true},
 		{"5398228707871527", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsCreditCard(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsCreditCard(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -653,72 +677,43 @@ func TestIsCreditCard(t *testing.T) {
 
 func TestIsISBN(t *testing.T) {
 	// ISBN 10
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"", false},
-		{"foo", false},
-		{"3423214121", false},
-		{"978-3836221191", false},
-		{"3-423-21412-1", false},
-		{"3 423 21412 1", false},
-		{"3836221195", true},
-		{"1-61729-085-8", true},
-		{"3 423 21412 0", true},
-		{"3 401 01319 X", true},
-	}
-	for i, test := range tests {
-		actual := IsISBN10(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsISBN10(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests := []string{"", "foo", "3423214121", "978-3836221191", "3-423-21412-1", "3 423 21412 1", "3836221195", "1-61729-085-8",
+		"3 423 21412 0", "3 401 01319 X"}
+	expected := []bool{false, false, false, false, false, false, true, true, true, true}
+	for i := 0; i < len(tests); i++ {
+		result := IsISBN10(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 	// ISBN 13
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"", false},
-		{"3-8362-2119-5", false},
-		{"01234567890ab", false},
-		{"978 3 8362 2119 0", false},
-		{"9784873113685", true},
-		{"978-4-87311-368-5", true},
-		{"978 3401013190", true},
-		{"978-3-8362-2119-1", true},
-	}
-	for i, test := range tests {
-		actual := IsISBN13(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsISBN13(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests = []string{"", "3-8362-2119-5", "01234567890ab", "978 3 8362 2119 0", "9784873113685", "978-4-87311-368-5",
+		"978 3401013190", "978-3-8362-2119-1"}
+	expected = []bool{false, false, false, false, true, true, true, true}
+	for i := 0; i < len(tests); i++ {
+		result := IsISBN13(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 	// Without version
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"3836221195", true},
-		{"1-61729-085-8", true},
-		{"3 423 21412 0", true},
-		{"3 401 01319 X", true},
-		{"9784873113685", true},
-		{"978-4-87311-368-5", true},
-		{"978 3401013190", true},
-		{"978-3-8362-2119-1", true},
-		{"", false},
-		{"foo", false},
-	}
-	for i, test := range tests {
-		actual := IsISBN(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsISBN(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests = []string{"3836221195", "1-61729-085-8", "3 423 21412 0", "3 401 01319 X", "9784873113685", "978-4-87311-368-5",
+		"978 3401013190", "978-3-8362-2119-1", "", "foo"}
+	expected = []bool{true, true, true, true, true, true, true, true, false, false}
+	for i := 0; i < len(tests); i++ {
+		result := IsISBN(tests[i], -1)
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 }
 
 func TestIsDataURI(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -736,7 +731,7 @@ func TestIsDataURI(t *testing.T) {
 		{"", false},
 		{"data:text,:;base85,U3VzcGVuZGlzc2UgbGVjdHVzIGxlbw==", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsDataURI(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsDataURI(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -745,6 +740,8 @@ func TestIsDataURI(t *testing.T) {
 }
 
 func TestIsBase64(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -762,7 +759,7 @@ func TestIsBase64(t *testing.T) {
 		{"", false},
 		{"Vml2YW11cyBmZXJtZtesting123", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsBase64(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsBase64(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -772,63 +769,40 @@ func TestIsBase64(t *testing.T) {
 
 func TestIsIP(t *testing.T) {
 	// IPv4
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"127.0.0.1", true},
-		{"0.0.0.0", true},
-		{"255.255.255.255", true},
-		{"1.2.3.4", true},
-		{"::1", false},
-		{"2001:db8:0000:1:1:1:1:1", false},
-	}
-	for i, test := range tests {
-		actual := IsIPv4(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsIPv4(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests := []string{"127.0.0.1", "0.0.0.0", "255.255.255.255", "1.2.3.4", "::1", "2001:db8:0000:1:1:1:1:1"}
+	expected := []bool{true, true, true, true, false, false}
+	for i := 0; i < len(tests); i++ {
+		result := IsIPv4(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 	// IPv6
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"127.0.0.1", false},
-		{"0.0.0.0", false},
-		{"255.255.255.255", false},
-		{"1.2.3.4", false},
-		{"::1", true},
-		{"2001:db8:0000:1:1:1:1:1", true},
-	}
-	for i, test := range tests {
-		actual := IsIPv6(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsIPv6(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests = []string{"127.0.0.1", "0.0.0.0", "255.255.255.255", "1.2.3.4", "::1", "2001:db8:0000:1:1:1:1:1"}
+	expected = []bool{false, false, false, false, true, true}
+	for i := 0; i < len(tests); i++ {
+		result := IsIPv6(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 	// Without version
-	var tests = []struct{
-		param		string
-		expected	bool
-	}{
-		{"127.0.0.1", true},
-		{"0.0.0.0", true},
-		{"255.255.255.255", true},
-		{"1.2.3.4", true},
-		{"::1", true},
-		{"2001:db8:0000:1:1:1:1:1", true},
-		{"300.0.0.0", false},
-	}
-	for i, test := range tests {
-		actual := IsIP(test.param)
-		if actual != test.expected {
-			t.Errorf("Expected IsIP(%q) to be %v, got %v", test.param, test.expected, actual)
+	tests = []string{"127.0.0.1", "0.0.0.0", "255.255.255.255", "1.2.3.4", "::1", "2001:db8:0000:1:1:1:1:1", "300.0.0.0"}
+	expected = []bool{true, true, true, true, true, true, false}
+	for i := 0; i < len(tests); i++ {
+		result := IsIP(tests[i])
+		if result != expected[i] {
+			t.Log("Case ", i, ": expected ", expected[i], " when result is ", result)
+			t.FailNow()
 		}
 	}
 }
 
 func TestIsMAC(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -839,7 +813,7 @@ func TestIsMAC(t *testing.T) {
 		{"", false},
 		{"abacaba", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsMAC(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsMAC(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -848,6 +822,8 @@ func TestIsMAC(t *testing.T) {
 }
 
 func TestIsLatitude(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -858,7 +834,7 @@ func TestIsLatitude(t *testing.T) {
 		{"+99.9", false},
 		{"108", false},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsLatitude(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsLatitude(%q) to be %v, got %v", test.param, test.expected, actual)
@@ -867,6 +843,8 @@ func TestIsLatitude(t *testing.T) {
 }
 
 func TestIsLongitude(t *testing.T) {
+	t.Parallel()
+
 	var tests = []struct{
 		param		string
 		expected	bool
@@ -877,7 +855,7 @@ func TestIsLongitude(t *testing.T) {
 		{"+382.3811", false},
 		{"23.11111111", true},
 	}
-	for i, test := range tests {
+	for _, test := range tests {
 		actual := IsLongitude(test.param)
 		if actual != test.expected {
 			t.Errorf("Expected IsLongitude(%q) to be %v, got %v", test.param, test.expected, actual)

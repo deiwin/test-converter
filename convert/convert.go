@@ -17,6 +17,7 @@ type field struct {
 var (
 	typeMatcher     = regexp.MustCompile(`\[\][^{]+`)
 	commaWhitespace = regexp.MustCompile(`, `)
+	testFunction    = regexp.MustCompile(`^func Test.*\*testing`)
 )
 
 // Test function converts an array-driven test to a table-driven test
@@ -24,11 +25,18 @@ func Test(input io.Reader, output io.Writer) {
 	scanner := bufio.NewScanner(input)
 	for scanner.Scan() {
 		line := scanner.Text()
-		trimmedLine := strings.TrimSpace(line)
 
-		if strings.HasPrefix(trimmedLine, "tests") {
-			fields, values, testFuncName := getTestData(scanner)
-			printStructuredTestData(output, fields, values, testFuncName)
+		if testFunction.MatchString(line) {
+			fmt.Fprintln(output, line)
+			scanner.Scan()
+			line = scanner.Text()
+			trimmedLine := strings.TrimSpace(line)
+			if strings.HasPrefix(trimmedLine, "tests") {
+				fields, values, testFuncName := getTestData(scanner)
+				printStructuredTestData(output, fields, values, testFuncName)
+			} else {
+				fmt.Fprintln(output, line)
+			}
 		} else {
 			fmt.Fprintln(output, line)
 		}
@@ -36,6 +44,8 @@ func Test(input io.Reader, output io.Writer) {
 }
 
 func printStructuredTestData(output io.Writer, fields []field, values []string, testFuncName string) {
+	fmt.Fprintln(output, "\tt.Parallel()")
+	fmt.Fprintln(output)
 	fmt.Fprintln(output, "\tvar tests = []struct{")
 	for _, f := range fields {
 		fmt.Fprintf(output, "\t\t%s\t\t%s\n", f.Name, f.Type)
@@ -52,7 +62,7 @@ func printStructuredTestData(output io.Writer, fields []field, values []string, 
 		fmt.Fprintf(output, "\t\t{%s},\n", strings.Join(fieldPlusExpectedValues, ", "))
 	}
 	fmt.Fprintln(output, "\t}")
-	fmt.Fprintln(output, "\tfor i, test := range tests {")
+	fmt.Fprintln(output, "\tfor _, test := range tests {")
 	commaSeparatedFieldNames := getCommaSeparatedFieldNames(fields)
 	fmt.Fprintf(output, "\t\tactual := %s(%s)\n", testFuncName, getCommaSeparatedFieldNames(fields))
 	fmt.Fprintln(output, "\t\tif actual != test.expected {")
