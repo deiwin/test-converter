@@ -1,6 +1,6 @@
 # test-converter
 
-This is a little command I quickly wrote to convert an array-driven test to a [table-drivem test](http://talks.golang.org/2014/testing.slide#5).
+This is a little command I quickly wrote to convert an array-driven test to a [table-driven test](http://talks.golang.org/2014/testing.slide#5).
 
 The current implementation is very specific to an [issue (asaskevich/govalidator#13)](https://github.com/asaskevich/govalidator/issues/13) for which it was created.
 
